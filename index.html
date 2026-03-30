@@ -185,14 +185,17 @@ ul { list-style: none; }
 .hero-right-photo {
   position: absolute; inset: 0;
   overflow: hidden;
+  background: #1C1A17;
 }
 .hero-slide {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out;
+  transition: opacity 1.5s ease-in-out;
+  will-change: opacity;
 }
 .hero-slide.active { opacity: 1; }
+.hero-slide.prev { opacity: 0; }
 .hero-right-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to right, rgba(245,240,232,0.3) 0%, transparent 40%);
@@ -1042,11 +1045,11 @@ ul { list-style: none; }
   </div><!-- end hero-left -->
   <div class="hero-right">
     <div class="hero-right-photo">
-      <div class="hero-slide active" style="background-image:url('https://i.ibb.co/CqwMxY5/Capture-d-cran-2026-03-30-181616.png')"></div>
-      <div class="hero-slide" style="background-image:url('https://i.ibb.co/JwwPQdfR/Capture-d-cran-2026-03-30-181705.png')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1400&q=80')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1616137148650-4aa14051b72b?w=1400&q=80')"></div>
-      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6d91b15?w=1400&q=80')"></div>
+      <div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=1600&q=90&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6d91b15?w=1600&q=90&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1616137148650-4aa14051b72b?w=1600&q=90&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600566753151-384129cf4d3a?w=1600&q=90&fit=crop')"></div>
+      <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=90&fit=crop')"></div>
     </div>
     <div class="hero-right-overlay"></div>
   </div>
@@ -1591,10 +1594,13 @@ ul { list-style: none; }
     if (!slides.length) return;
     let current = 0;
     setInterval(() => {
-      slides[current].classList.remove('active');
+      const prev = current;
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
-    }, 4000);
+      setTimeout(() => {
+        slides[prev].classList.remove('active');
+      }, 1500);
+    }, 5000);
   })();
 
   document.querySelectorAll('.dash-tab').forEach(function(tab){
