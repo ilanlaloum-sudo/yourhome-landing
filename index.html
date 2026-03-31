@@ -940,9 +940,45 @@ ul { list-style: none; }
 .lang-en [data-lang-grid="en"] { display: grid; }
 
 @media (max-width: 768px) {
-  #hero { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
-  .hero-left { padding: 96px 24px 64px; justify-content: center; min-height: 100vh; }
+  #hero {
+    grid-template-columns: 1fr;
+    position: relative;
+    min-height: 100vh;
+  }
+  .hero-right {
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(28,26,23,0.55);
+    z-index: 1;
+  }
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    padding: 120px 24px 80px;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  .hero-h1 { color: var(--white); }
+  .hero-h1 em { color: var(--gold-light); }
+  .hero-lead { color: rgba(255,255,255,0.85); }
+  .hero-differentiator {
+    background: rgba(28,26,23,0.4);
+    border-color: rgba(154,125,78,0.3);
+  }
+  .hero-diff-label { color: var(--white); }
+  .hero-scroll { color: rgba(255,255,255,0.6); }
+}
+@media (max-width: 768px) {
+  #temoignages > .container > div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 @media (max-width: 480px) {
   .section { padding: 80px 24px; }
