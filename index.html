@@ -242,10 +242,34 @@ ul { list-style: none; }
   letter-spacing: 0.12em; text-transform: uppercase;
   color: var(--text); line-height: 1.4;
 }
+.hero-hook {
+  font-family: 'Jost', sans-serif;
+  font-size: 15px; font-weight: 300;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 14px 0 22px;
+}
 .hero-lead {
   margin: 24px 0 44px;
   font-size: 15px; font-weight: 300; line-height: 1.82;
   color: var(--text); max-width: 500px;
+}
+.why-problem {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; font-style: italic;
+  color: var(--muted); line-height: 1.7;
+  max-width: 680px; margin-bottom: 40px;
+}
+.svc-roi {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; font-style: italic;
+  color: var(--gold); letter-spacing: 0.04em;
+  margin-bottom: 32px;
+}
+.process-trigger {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300; font-style: italic;
+  color: var(--gold); margin-top: 12px;
 }
 .hero-actions { display: flex; flex-direction: column; gap: 12px; max-width: 320px; }
 .hero-signature {
@@ -967,6 +991,7 @@ ul { list-style: none; }
   }
   .hero-h1 { color: var(--white); }
   .hero-h1 em { color: var(--gold-light); }
+  .hero-hook { color: rgba(255,255,255,0.75); }
   .hero-lead { color: rgba(255,255,255,0.85); }
   .hero-differentiator {
     background: rgba(28,26,23,0.4);
@@ -1049,6 +1074,8 @@ ul { list-style: none; }
       <span data-lang-inline="fr">Votre bien &agrave; Dubai.<br><em>Pilot&eacute; comme un actif.</em></span>
       <span data-lang-inline="en">Your Dubai property.<br><em>Managed like an asset.</em></span>
     </h1>
+    <p class="hero-hook" data-lang-inline="fr">Maximisez votre rendement, sans aucune contrainte.</p>
+    <p class="hero-hook" data-lang-inline="en">Maximise your return, with zero constraints.</p>
     <div class="hero-differentiator">
       <div class="hero-diff-item">
         <span class="hero-diff-icon">&#9671;</span>
@@ -1068,8 +1095,8 @@ ul { list-style: none; }
       </div>
     </div>
     <p class="hero-lead">
-      <span data-lang-inline="fr">Location, maintenance, optimisation, reporting &mdash; Your Home prend en charge l&rsquo;int&eacute;gralit&eacute; de votre bien. Vous percevez vos revenus. Nous g&eacute;rons tout le reste.</span>
-      <span data-lang-inline="en">Rental, maintenance, optimisation, reporting &mdash; Your Home handles your property in full. You receive your income. We handle everything else.</span>
+      <span data-lang-inline="fr">Votre bien n&rsquo;est pas simplement g&eacute;r&eacute;. Il est pilot&eacute;. Location, maintenance, optimisation, reporting &mdash; Your Home prend en charge chaque d&eacute;tail pour que votre investissement performe au maximum.</span>
+      <span data-lang-inline="en">Your property isn&rsquo;t just managed. It&rsquo;s driven. Rental, maintenance, optimisation, reporting &mdash; Your Home handles every detail so your investment performs at its best.</span>
     </p>
     <div class="hero-actions">
       <a href="#cta-final" class="btn btn-gold"><span data-lang-inline="fr">Confier mon bien</span><span data-lang-inline="en">List My Property</span></a>
@@ -1127,6 +1154,8 @@ ul { list-style: none; }
       <h2 class="h2"><span data-lang-inline="fr">Pas une agence de location.<br><em>Un partenaire de rendement.</em></span><span data-lang-inline="en">Not a rental agency.<br><em>A performance partner.</em></span></h2>
       <p class="sub" style="margin-top:16px"><span data-lang-inline="fr">La plupart des conciergeries g&egrave;rent des appartements. Your Home pilote des actifs. Notre approche est celle d&rsquo;un op&eacute;rateur patrimonial : chaque bien est analys&eacute;, positionn&eacute; et optimis&eacute; en continu.</span><span data-lang-inline="en">Most concierges manage apartments. Your Home manages assets. Our approach is that of a wealth operator: every property is analysed, positioned and continuously optimised.</span></p>
     </div>
+    <p class="why-problem reveal" data-lang-inline="fr">La plupart des propri&eacute;taires subissent une gestion approximative, un manque de suivi et des revenus sous-optimis&eacute;s. Nous avons structur&eacute; l&rsquo;inverse.</p>
+    <p class="why-problem reveal" data-lang-inline="en">Most owners deal with inconsistent management, poor visibility and underperforming returns. We built the opposite.</p>
     <div class="why-grid">
       <div class="why-card reveal">
         <h3><span data-lang-inline="fr">Gestion int&eacute;grale</span><span data-lang-inline="en">Full Management</span></h3>
@@ -1216,6 +1245,8 @@ ul { list-style: none; }
       <h2 class="h2"><span data-lang-inline="fr">Un service complet.<br><em>Z&eacute;ro compromis.</em></span><span data-lang-inline="en">A complete service.<br><em>Zero compromise.</em></span></h2>
       <p class="sub" style="margin-top:16px"><span data-lang-inline="fr">Chaque aspect de votre bien pris en charge avec la m&ecirc;me rigueur, du premier contact au reporting mensuel.</span><span data-lang-inline="en">Every aspect of your property managed with the same rigour, from first contact to monthly reporting.</span></p>
     </div>
+    <p class="svc-roi reveal" data-lang-inline="fr">Chaque service est con&ccedil;u pour une seule chose : augmenter vos revenus tout en prot&eacute;geant votre bien.</p>
+    <p class="svc-roi reveal" data-lang-inline="en">Every service is designed for one purpose: increase your revenue while protecting your asset.</p>
     <div class="svc-grid">
       <div class="svc-card svc-featured reveal">
         <div class="svc-icon">
@@ -1233,6 +1264,7 @@ ul { list-style: none; }
         <span class="svc-lbl"><span data-lang-inline="fr">Distribution</span><span data-lang-inline="en">Distribution</span></span>
         <h3><span data-lang-inline="fr">Mise en location strat&eacute;gique</span><span data-lang-inline="en">Strategic Listing</span></h3>
         <p><span data-lang-inline="fr">Shooting photo professionnel, r&eacute;daction premium, tarification dynamique sur toutes les plateformes haut de gamme. Votre bien pr&eacute;sent&eacute; &agrave; sa juste valeur.</span><span data-lang-inline="en">Professional photo shoot, premium copywriting, dynamic pricing across all high-end platforms. Your property presented at its true value.</span></p>
+        <span style="display:block; margin-top:10px; font-size:12px; color:var(--gold); font-style:italic; font-family:'Cormorant Garamond',serif;">Chaque d&eacute;cision est prise pour maximiser votre rendement.</span>
         <a href="#cta-final" class="svc-link"><span data-lang-inline="fr">En savoir plus</span><span data-lang-inline="en">Learn more</span></a>
       </div>
       <div class="svc-card reveal">
@@ -1247,6 +1279,7 @@ ul { list-style: none; }
         <span class="svc-lbl"><span data-lang-inline="fr">Op&eacute;rations</span><span data-lang-inline="en">Operations</span></span>
         <h3><span data-lang-inline="fr">Maintenance &amp; Entretien</span><span data-lang-inline="en">Maintenance &amp; Upkeep</span></h3>
         <p><span data-lang-inline="fr">Inspections syst&eacute;matiques, m&eacute;nage h&ocirc;telier, interventions rapides. Votre bien maintenu dans un &eacute;tat impeccable, s&eacute;jour apr&egrave;s s&eacute;jour.</span><span data-lang-inline="en">Systematic inspections, hotel-grade cleaning, rapid interventions. Your property maintained in impeccable condition, stay after stay.</span></p>
+        <span style="display:block; margin-top:10px; font-size:12px; color:var(--gold); font-style:italic; font-family:'Cormorant Garamond',serif;">Vous n&rsquo;avez rien &agrave; g&eacute;rer. Nous g&eacute;rons tout.</span>
         <a href="#cta-final" class="svc-link"><span data-lang-inline="fr">En savoir plus</span><span data-lang-inline="en">Learn more</span></a>
       </div>
       <div class="svc-card reveal">
@@ -1254,6 +1287,7 @@ ul { list-style: none; }
         <span class="svc-lbl"><span data-lang-inline="fr">Transparence</span><span data-lang-inline="en">Transparency</span></span>
         <h3>Reporting &amp; Performance</h3>
         <p><span data-lang-inline="fr">Rapport mensuel avant le 5&nbsp;: revenus bruts et nets, taux d&rsquo;occupation, d&eacute;penses, comparatif march&eacute;. Aucune surprise, aucune zone d&rsquo;ombre.</span><span data-lang-inline="en">Monthly report by the 5th: gross and net revenue, occupancy rate, expenses, market comparison. No surprises, no blind spots.</span></p>
+        <span style="display:block; margin-top:10px; font-size:12px; color:var(--gold); font-style:italic; font-family:'Cormorant Garamond',serif;">Votre bien n&rsquo;est pas simplement g&eacute;r&eacute;. Il est pilot&eacute;.</span>
         <a href="#cta-final" class="svc-link"><span data-lang-inline="fr">En savoir plus</span><span data-lang-inline="en">Learn more</span></a>
       </div>
       <div class="svc-card reveal d1">
@@ -1355,7 +1389,7 @@ ul { list-style: none; }
         <a href="#cta-final" class="dash-cta"><span data-lang-inline="fr">Demander l&rsquo;acc&egrave;s &rarr;</span><span data-lang-inline="en">Request access &rarr;</span></a>
       </div>
       <div class="app-benefits reveal d1">
-        <p class="app-benefits-intro"><span data-lang-inline="fr">L&rsquo;application Your Home est con&ccedil;ue pour vous donner une visibilit&eacute; compl&egrave;te sans jamais vous surcharger. Tout ce qui compte, au bon moment.</span><span data-lang-inline="en">The Your Home app is designed to give you complete visibility without ever overwhelming you. Everything that matters, at the right moment.</span></p>
+        <p class="app-benefits-intro"><span data-lang-inline="fr">Vous avez une vision compl&egrave;te de votre investissement, sans jamais d&eacute;pendre de nous pour l&rsquo;information. L&rsquo;application Your Home est con&ccedil;ue pour vous donner le contr&ocirc;le total &mdash; en temps r&eacute;el, depuis n&rsquo;importe o&ugrave;.</span><span data-lang-inline="en">You have a complete view of your investment, without ever depending on us for information. The Your Home app is designed to give you full control &mdash; in real time, from anywhere.</span></p>
         <div class="benefit">
           <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
           <div><div class="benefit-title"><span data-lang-inline="fr">Revenus en temps r&eacute;el</span><span data-lang-inline="en">Real-time revenue</span></div><div class="benefit-desc"><span data-lang-inline="fr">Revenus bruts et nets, jour par jour, avec comparatif mensuel et tendance annuelle.</span><span data-lang-inline="en">Gross and net revenue, day by day, with monthly comparison and annual trend.</span></div></div>
@@ -1433,6 +1467,8 @@ ul { list-style: none; }
     <div class="sec-header reveal">
       <span class="eyebrow"><span data-lang-inline="fr">Comment &ccedil;a marche</span><span data-lang-inline="en">How it works</span></span>
       <h2 class="h2"><span data-lang-inline="fr">Simple. Structur&eacute;.<br><em>Op&eacute;rationnel en 7 jours.</em></span><span data-lang-inline="en">Simple. Structured.<br><em>Operational in 7 days.</em></span></h2>
+      <p class="process-trigger reveal" data-lang-inline="fr">En moins de 7 jours, votre bien est pr&ecirc;t &agrave; g&eacute;n&eacute;rer des revenus.</p>
+      <p class="process-trigger reveal" data-lang-inline="en">In less than 7 days, your property is ready to generate income.</p>
     </div>
     <div class="process-grid">
       <div class="process-step reveal"><span class="process-num">01</span><h3><span data-lang-inline="fr">&Eacute;valuation</span><span data-lang-inline="en">Assessment</span></h3><p><span data-lang-inline="fr">Analyse de votre bien, estimation du potentiel locatif, recommandations de positionnement. Un diagnostic pr&eacute;cis, sans engagement.</span><span data-lang-inline="en">Analysis of your property, rental potential assessment, positioning recommendations. An honest diagnostic, no commitment.</span></p></div>
@@ -1534,7 +1570,7 @@ ul { list-style: none; }
 
 <!-- CTA FINAL -->
 <section id="cta-final">
-  <h2 class="cta-h2"><span data-lang-inline="fr">Pr&ecirc;t &agrave; confier votre bien<br>&agrave; <em>des mains expertes&nbsp;?</em></span><span data-lang-inline="en">Ready to entrust your property<br>to <em>expert hands?</em></span></h2>
+  <h2 class="cta-h2"><span data-lang-inline="fr">Pr&ecirc;t &agrave; transformer votre bien<br>en <em>actif performant&nbsp;?</em></span><span data-lang-inline="en">Ready to turn your property<br>into a <em>performing asset?</em></span></h2>
   <span class="cta-signature">Your Home is Ours.</span>
   <div class="cta-btns">
     <a href="https://wa.me/33600000000" target="_blank" class="btn btn-gold">
