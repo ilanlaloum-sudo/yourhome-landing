@@ -307,6 +307,69 @@ ul { list-style: none; }
 }
 
 /* ============================================================
+   QUICK VALUE
+============================================================ */
+#quick-value {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.qv-inner {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.qv-item {
+  padding: 28px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-right: 1px solid var(--border);
+}
+.qv-item:last-child { border-right: none; }
+.qv-icon {
+  color: var(--gold);
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.qv-label {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+@media (max-width: 600px) {
+  .qv-inner { grid-template-columns: repeat(2,1fr); }
+  .qv-item:nth-child(2) { border-right: none; }
+  .qv-item:nth-child(3), .qv-item:nth-child(4) { border-top: 1px solid var(--border); }
+}
+
+/* ============================================================
+   STD PAIN + APP CONTROL
+============================================================ */
+.std-pain {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 19px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 580px;
+  margin-top: 16px;
+}
+.app-control {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--gold-light);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* ============================================================
    PROOF BAND (replaces stats - qualitative + credible)
 ============================================================ */
 #proof-band {
@@ -1128,6 +1191,32 @@ ul { list-style: none; }
   </div>
 </section>
 
+<!-- QUICK VALUE -->
+<div id="quick-value">
+  <div class="qv-inner">
+    <div class="qv-item reveal">
+      <span class="qv-icon">&loz;</span>
+      <span class="qv-label" data-lang-inline="fr">Gestion compl&egrave;te</span>
+      <span class="qv-label" data-lang-inline="en">Full management</span>
+    </div>
+    <div class="qv-item reveal d1">
+      <span class="qv-icon">&loz;</span>
+      <span class="qv-label" data-lang-inline="fr">Optimisation des revenus</span>
+      <span class="qv-label" data-lang-inline="en">Revenue optimisation</span>
+    </div>
+    <div class="qv-item reveal d2">
+      <span class="qv-icon">&loz;</span>
+      <span class="qv-label" data-lang-inline="fr">Reporting transparent</span>
+      <span class="qv-label" data-lang-inline="en">Transparent reporting</span>
+    </div>
+    <div class="qv-item reveal d3">
+      <span class="qv-icon">&loz;</span>
+      <span class="qv-label" data-lang-inline="fr">Exp&eacute;rience locataire premium</span>
+      <span class="qv-label" data-lang-inline="en">Premium guest experience</span>
+    </div>
+  </div>
+</div>
+
 <!-- PROOF BAND -->
 <div id="proof-band">
   <div class="proof-inner">
@@ -1176,6 +1265,12 @@ ul { list-style: none; }
         <h3><span data-lang-inline="fr">Visibilit&eacute; totale</span><span data-lang-inline="en">Total Visibility</span></h3>
         <p><span data-lang-inline="fr">Tableau de bord en temps r&eacute;el, reporting mensuel avant le 5, acc&egrave;s permanent &agrave; tous vos indicateurs. Aucune zone d&rsquo;ombre.</span><span data-lang-inline="en">Real-time dashboard, monthly report by the 5th, permanent access to all your indicators. No blind spots.</span></p>
       </div>
+    </div>
+    <div class="why-trigger reveal" style="margin-top:48px; padding:32px; background:var(--cream-deep); border:1px solid var(--border); max-width:1080px;">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; font-style:italic; color:var(--dark); line-height:1.7; margin-bottom:16px;">
+        <span data-lang-inline="fr">&laquo; Votre bien est pilot&eacute;, pas simplement g&eacute;r&eacute;. Chaque d&eacute;cision vise &agrave; maximiser votre rendement. Vous n&rsquo;avez rien &agrave; g&eacute;rer &mdash; nous g&eacute;rons tout. &raquo;</span>
+        <span data-lang-inline="en">&laquo; Your property is driven, not simply managed. Every decision aims to maximise your return. You handle nothing &mdash; we handle everything. &raquo;</span>
+      </p>
     </div>
   </div>
 </section>
@@ -1396,6 +1491,8 @@ ul { list-style: none; }
         <a href="#cta-final" class="dash-cta"><span data-lang-inline="fr">Demander l&rsquo;acc&egrave;s &rarr;</span><span data-lang-inline="en">Request access &rarr;</span></a>
       </div>
       <div class="app-benefits reveal d1">
+        <p class="app-control reveal" data-lang-inline="fr">Vous avez une vision compl&egrave;te de votre investissement, sans jamais d&eacute;pendre de nous pour l&rsquo;information.</p>
+        <p class="app-control reveal" data-lang-inline="en">You have a complete view of your investment, without ever depending on us for information.</p>
         <p class="app-benefits-intro"><span data-lang-inline="fr">Vous avez une vision compl&egrave;te de votre investissement, sans jamais d&eacute;pendre de nous pour l&rsquo;information. L&rsquo;application Your Home est con&ccedil;ue pour vous donner le contr&ocirc;le total &mdash; en temps r&eacute;el, depuis n&rsquo;importe o&ugrave;.</span><span data-lang-inline="en">You have a complete view of your investment, without ever depending on us for information. The Your Home app is designed to give you full control &mdash; in real time, from anywhere.</span></p>
         <div class="benefit">
           <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg></div>
@@ -1446,6 +1543,8 @@ ul { list-style: none; }
       <span class="eyebrow"><span data-lang-inline="fr">Notre niveau d&rsquo;exigence</span><span data-lang-inline="en">Our standards</span></span>
       <h2 class="h2"><span data-lang-inline="fr">Des standards h&ocirc;teliers.<br><em>Appliqu&eacute;s &agrave; votre patrimoine.</em></span><span data-lang-inline="en">Hotel-grade standards.<br><em>Applied to your assets.</em></span></h2>
       <p class="sub" style="margin-top:16px"><span data-lang-inline="fr">Chaque bien g&eacute;r&eacute; re&ccedil;oit le m&ecirc;me niveau d&rsquo;attention au d&eacute;tail &mdash; sans exception.</span><span data-lang-inline="en">Every managed property receives the same level of attention to detail &mdash; no exception.</span></p>
+      <p class="std-pain reveal" data-lang-inline="fr">La majorit&eacute; des propri&eacute;taires subissent une gestion approximative et des revenus sous-optimis&eacute;s. Nous avons structur&eacute; l&rsquo;inverse.</p>
+      <p class="std-pain reveal" data-lang-inline="en">Most property owners endure inconsistent management and underperforming returns. We built the exact opposite.</p>
     </div>
     <div class="std-grid">
       <div class="std-item reveal">
