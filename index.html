@@ -189,13 +189,13 @@ ul { list-style: none; }
 }
 .hero-slide {
   position: absolute; inset: 0;
-  background-size: cover; background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1.5s ease-in-out;
   will-change: opacity;
 }
 .hero-slide.active { opacity: 1; }
-.hero-slide.prev { opacity: 0; }
 .hero-right-overlay {
   position: absolute; inset: 0;
   background: linear-gradient(to right, rgba(245,240,232,0.3) 0%, transparent 40%);
@@ -1045,11 +1045,10 @@ ul { list-style: none; }
   </div><!-- end hero-left -->
   <div class="hero-right">
     <div class="hero-right-photo">
-      <div class="hero-slide active" style="background-image:url('images/preview.webp')"></div>
-      <div class="hero-slide" style="background-image:url('images/preview (1).webp')"></div>
-      <div class="hero-slide" style="background-image:url('images/preview (2).webp')"></div>
-      <div class="hero-slide" style="background-image:url('images/preview (3).webp')"></div>
-      <div class="hero-slide" style="background-image:url('images/preview.webp')"></div>
+      <div class="hero-slide active" style="background-image:url('images/preview.webp'); background-position: center 30%;"></div>
+      <div class="hero-slide" style="background-image:url('images/preview (1).webp'); background-position: center center;"></div>
+      <div class="hero-slide" style="background-image:url('images/preview (2).webp'); background-position: center center;"></div>
+      <div class="hero-slide" style="background-image:url('images/preview (3).webp'); background-position: center 25%;"></div>
     </div>
     <div class="hero-right-overlay"></div>
   </div>
