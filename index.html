@@ -1737,14 +1737,16 @@ function setLang(lang) {
 </script>
 
 <!-- ============================================================
-   CHAT WIDGET — Qualification investisseur
+   CHAT WIDGET — Conciergerie Your Home
 ============================================================ -->
 <style>
 #yh-chat * { box-sizing: border-box; }
 #yh-chat {
   --champagne: #F5EEE0;
   --gold:      #B8935A;
+  --gold-deep: #A07F46;
   --gold-soft: #D4B68A;
+  --gold-glow: rgba(184,147,90,0.32);
   --ink:       #2A2620;
   --muted:     #8A8278;
   --line:      rgba(184,147,90,0.22);
@@ -1756,22 +1758,44 @@ function setLang(lang) {
   color: var(--ink);
 }
 #yh-chat-toggle {
+  position: relative;
   width: 60px; height: 60px; border-radius: 50%;
   background: var(--gold); color: #fff;
   border: none; cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 18px rgba(28,26,23,0.18);
   display: flex; align-items: center; justify-content: center;
-  transition: transform 0.18s, background 0.18s;
+  transition: transform 0.18s, background 0.18s, box-shadow 0.22s;
 }
-#yh-chat-toggle:hover { background: #A07F46; transform: scale(1.05); }
+#yh-chat-toggle:hover,
+#yh-chat-toggle:focus-visible {
+  background: var(--gold-deep);
+  transform: scale(1.04);
+  box-shadow: 0 6px 18px rgba(28,26,23,0.22), 0 0 0 6px var(--gold-glow);
+  outline: none;
+}
 #yh-chat-toggle svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 1.6; }
 #yh-chat-toggle.open svg.icon-msg { display: none; }
 #yh-chat-toggle:not(.open) svg.icon-close { display: none; }
 
+.yh-unread {
+  display: none;
+  position: absolute;
+  top: 8px; right: 8px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--gold-soft);
+  border: 2px solid #fff;
+  animation: yh-pulse 1.6s ease-in-out infinite;
+}
+#yh-chat-toggle.has-unread .yh-unread { display: block; }
+@keyframes yh-pulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%      { transform: scale(1.25); opacity: 0.65; }
+}
+
 #yh-chat-panel {
   position: absolute; right: 0; bottom: 76px;
-  width: 360px; max-width: calc(100vw - 32px);
-  height: 540px; max-height: calc(100vh - 120px);
+  width: 380px; max-width: calc(100vw - 32px);
+  height: 600px; max-height: calc(100vh - 120px);
   background: var(--champagne);
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -1795,25 +1819,42 @@ function setLang(lang) {
 }
 .yh-chat-head-avatar {
   width: 36px; height: 36px; border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.18);
   display: flex; align-items: center; justify-content: center;
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px; font-weight: 500;
+  flex-shrink: 0;
 }
+.yh-chat-head-info { flex: 1; min-width: 0; }
 .yh-chat-head-title {
   font-family: 'Cormorant Garamond', serif;
   font-size: 18px; font-weight: 500; line-height: 1.1;
 }
 .yh-chat-head-sub {
-  font-size: 11px; font-weight: 300; opacity: 0.85;
-  letter-spacing: 0.08em; margin-top: 2px;
+  font-size: 11px; font-weight: 300; opacity: 0.88;
+  letter-spacing: 0.06em; margin-top: 3px;
 }
+.yh-chat-head-close {
+  width: 32px; height: 32px;
+  background: transparent; border: none; cursor: pointer;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; opacity: 0.85;
+  transition: background 0.16s, opacity 0.16s;
+  flex-shrink: 0;
+}
+.yh-chat-head-close:hover,
+.yh-chat-head-close:focus-visible {
+  background: rgba(255,255,255,0.14); opacity: 1; outline: none;
+}
+.yh-chat-head-close svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.8; fill: none; }
 
 .yh-chat-body {
   flex: 1;
   padding: 18px 16px 12px;
   overflow-y: auto;
-  display: flex; flex-direction: column; gap: 10px;
+  -webkit-overflow-scrolling: touch;
+  display: flex; flex-direction: column; gap: 12px;
   scrollbar-width: thin;
   scrollbar-color: var(--gold-soft) transparent;
 }
@@ -1868,7 +1909,7 @@ function setLang(lang) {
 .yh-options { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 4px 4px; }
 .yh-opt {
   font-family: 'Raleway', sans-serif;
-  font-size: 12px; font-weight: 500;
+  font-size: 12.5px; font-weight: 500;
   padding: 9px 14px;
   background: #fff;
   color: var(--gold);
@@ -1877,7 +1918,26 @@ function setLang(lang) {
   cursor: pointer;
   transition: all 0.16s;
 }
-.yh-opt:hover { background: var(--gold); color: #fff; }
+.yh-opt:hover,
+.yh-opt:focus-visible {
+  background: var(--gold); color: #fff; outline: none;
+}
+
+.yh-progress {
+  display: flex; align-items: center; justify-content: center;
+  gap: 7px;
+  padding: 8px 0 10px;
+  flex-shrink: 0;
+  background: var(--champagne);
+}
+.yh-progress.hidden { display: none; }
+.yh-progress-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: rgba(184,147,90,0.20);
+  transition: background 0.22s, transform 0.22s;
+}
+.yh-progress-dot.done    { background: var(--gold-soft); }
+.yh-progress-dot.current { background: var(--gold); transform: scale(1.45); }
 
 .yh-chat-input {
   border-top: 1px solid var(--line);
@@ -1904,28 +1964,58 @@ function setLang(lang) {
   display: flex; align-items: center; justify-content: center;
   transition: background 0.16s;
 }
-.yh-chat-input button:hover { background: #A07F46; }
+.yh-chat-input button:hover { background: var(--gold-deep); }
 .yh-chat-input button:disabled { background: var(--gold-soft); cursor: not-allowed; }
 .yh-chat-input button svg { width: 14px; height: 14px; fill: #fff; }
 .yh-chat-input.hidden { display: none; }
 
-@media (max-width: 480px) {
+@media (max-width: 767px) {
   #yh-chat { right: 16px; bottom: 16px; }
-  #yh-chat-panel { width: calc(100vw - 32px); height: 70vh; }
+  #yh-chat-panel {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100vh;
+    max-height: 100dvh;
+    border-radius: 0;
+    border: none;
+    bottom: auto; right: auto;
+  }
+  #yh-chat.is-open #yh-chat-toggle { display: none; }
+  .yh-opt { min-height: 44px; padding: 12px 18px; font-size: 13px; }
+  .yh-chat-input button { width: 40px; height: 40px; }
+  .yh-chat-input input { font-size: 16px; }
+  .yh-chat-head { padding-top: max(18px, env(safe-area-inset-top)); }
+  .yh-chat-input { padding-bottom: max(10px, env(safe-area-inset-bottom)); }
 }
+body.yh-no-scroll { overflow: hidden; }
 </style>
 
 <div id="yh-chat" aria-live="polite">
-  <div id="yh-chat-panel" role="dialog" aria-label="Chat Your Home">
+  <div id="yh-chat-panel" role="dialog" aria-label="Your Home — concierge">
     <div class="yh-chat-head">
       <div class="yh-chat-head-avatar">YH</div>
-      <div>
+      <div class="yh-chat-head-info">
         <div class="yh-chat-head-title">Your Home</div>
-        <div class="yh-chat-head-sub" data-yh-sub-fr>QUALIFICATION INVESTISSEUR</div>
-        <div class="yh-chat-head-sub" data-yh-sub-en style="display:none">INVESTOR QUALIFICATION</div>
+        <div class="yh-chat-head-sub" data-yh-sub-fr>Conciergerie premium · Dubai</div>
+        <div class="yh-chat-head-sub" data-yh-sub-en style="display:none">Premium concierge · Dubai</div>
       </div>
+      <button type="button" class="yh-chat-head-close" id="yh-chat-close" aria-label="Fermer le chat">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+      </button>
     </div>
     <div class="yh-chat-body" id="yh-chat-body"></div>
+    <div class="yh-progress hidden" id="yh-chat-progress" aria-hidden="true">
+      <span class="yh-progress-dot"></span>
+      <span class="yh-progress-dot"></span>
+      <span class="yh-progress-dot"></span>
+      <span class="yh-progress-dot"></span>
+      <span class="yh-progress-dot"></span>
+      <span class="yh-progress-dot"></span>
+    </div>
     <form class="yh-chat-input" id="yh-chat-input" autocomplete="off">
       <input type="text" id="yh-chat-text" placeholder="" aria-label="Message" />
       <button type="submit" id="yh-chat-send" aria-label="Envoyer">
@@ -1934,6 +2024,7 @@ function setLang(lang) {
     </form>
   </div>
   <button id="yh-chat-toggle" aria-label="Ouvrir le chat">
+    <span class="yh-unread" aria-hidden="true"></span>
     <svg class="icon-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <svg class="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
   </button>
@@ -1946,26 +2037,30 @@ function setLang(lang) {
   function getLang(){
     return document.body.classList.contains('lang-en') ? 'en' : 'fr';
   }
+  function isMobile(){
+    return window.matchMedia('(max-width: 767px)').matches;
+  }
 
   var T = {
     fr: {
       placeholder:   'Tapez votre réponse…',
       placeholderEm: 'Email ou téléphone…',
-      placeholderNb: 'Nombre de biens…',
-      greet:    'Bonjour ! Je suis votre conseiller Your Home. Quelques questions rapides pour préparer votre dossier.',
-      askName:  'Pour commencer, comment vous appelez-vous ?',
-      askContact: 'Parfait. Votre email ou téléphone pour vous recontacter ?',
-      askProject: 'Quel est votre profil d’investisseur ?',
-      askBudget:  'Quel budget envisagez-vous ?',
-      askZone:    'Quelle zone à Dubai vous intéresse ?',
-      askCount:   'Combien de biens souhaitez-vous acquérir ?',
-      sending:    'Un instant, je transmets votre dossier…',
+      greet:    'Bonjour. Quelques mots sur votre projet à Dubai pour que nous vous accompagnions au plus juste.',
+      askName:  'Comment vous appelez-vous ?',
+      askContact: 'Parfait. Email ou téléphone pour vous joindre ?',
+      askProject: 'Vous nous écrivez depuis…',
+      askBudget:  'Quel ordre de grandeur pour votre acquisition ?',
+      askZone:    'Quelle zone à Dubai retient votre attention ?',
+      askCount:   'Un seul bien ou plusieurs ?',
+      sending:    'Un instant, je note tout cela…',
       err:        'Désolé, une erreur est survenue. Réessayez ou écrivez-nous à contact@yourhome.ae',
       invalidContact: 'Merci de saisir un email valide ou un numéro de téléphone.',
+      ariaOpen:  'Ouvrir le chat',
+      ariaClose: 'Fermer le chat',
       project: [
-        { v:'investor_remote', l:'Investisseur à distance' },
-        { v:'investor_dubai',  l:'Résident à Dubai' },
-        { v:'investor_intl',   l:'Investisseur international' }
+        { v:'investor_remote', l:'Hors de Dubai' },
+        { v:'investor_dubai',  l:'Dubai' },
+        { v:'investor_intl',   l:'International' }
       ],
       budget: [
         { v:'200k',  l:'~ 200k €' },
@@ -1977,27 +2072,33 @@ function setLang(lang) {
         { v:'Downtown',       l:'Downtown' },
         { v:'Palm',           l:'Palm Jumeirah' },
         { v:'Business Bay',   l:'Business Bay' },
-        { v:'Autre',          l:'Autre' }
+        { v:'Autre',          l:'Pas encore décidé' }
+      ],
+      count: [
+        { v:'1',  l:'Un bien' },
+        { v:'2',  l:'Plusieurs' },
+        { v:'',   l:'Pas encore décidé' }
       ]
     },
     en: {
       placeholder:   'Type your answer…',
       placeholderEm: 'Email or phone…',
-      placeholderNb: 'Number of properties…',
-      greet:    'Hello! I’m your Your Home advisor. A few quick questions to prepare your file.',
-      askName:  'To start, what is your name?',
-      askContact: 'Great. Your email or phone so we can get back to you?',
-      askProject: 'What is your investor profile?',
-      askBudget:  'What budget are you considering?',
-      askZone:    'Which Dubai area interests you?',
-      askCount:   'How many properties do you wish to acquire?',
-      sending:    'One moment, sending your file…',
+      greet:    'Hello. A few words about your Dubai project so we can guide you with care.',
+      askName:  'May I have your name?',
+      askContact: 'Email or phone where we can reach you?',
+      askProject: 'You’re reaching out from…',
+      askBudget:  'What’s the order of magnitude for your purchase?',
+      askZone:    'Which Dubai area catches your eye?',
+      askCount:   'One property or several?',
+      sending:    'One moment, I’m noting everything…',
       err:        'Sorry, an error occurred. Please retry or email contact@yourhome.ae',
       invalidContact: 'Please enter a valid email or phone number.',
+      ariaOpen:  'Open chat',
+      ariaClose: 'Close chat',
       project: [
-        { v:'investor_remote', l:'Remote investor' },
-        { v:'investor_dubai',  l:'Dubai resident' },
-        { v:'investor_intl',   l:'International investor' }
+        { v:'investor_remote', l:'Outside Dubai' },
+        { v:'investor_dubai',  l:'Dubai' },
+        { v:'investor_intl',   l:'International' }
       ],
       budget: [
         { v:'200k',  l:'~ 200k €' },
@@ -2009,29 +2110,52 @@ function setLang(lang) {
         { v:'Downtown',       l:'Downtown' },
         { v:'Palm',           l:'Palm Jumeirah' },
         { v:'Business Bay',   l:'Business Bay' },
-        { v:'Autre',          l:'Other' }
+        { v:'Autre',          l:'Undecided' }
+      ],
+      count: [
+        { v:'1',  l:'One' },
+        { v:'2',  l:'Several' },
+        { v:'',   l:'Undecided' }
       ]
     }
   };
 
-  var $body  = document.getElementById('yh-chat-body');
-  var $form  = document.getElementById('yh-chat-input');
-  var $text  = document.getElementById('yh-chat-text');
-  var $send  = document.getElementById('yh-chat-send');
-  var $panel = document.getElementById('yh-chat-panel');
-  var $root  = document.getElementById('yh-chat');
-  var $toggle= document.getElementById('yh-chat-toggle');
+  var $body     = document.getElementById('yh-chat-body');
+  var $form     = document.getElementById('yh-chat-input');
+  var $text     = document.getElementById('yh-chat-text');
+  var $send     = document.getElementById('yh-chat-send');
+  var $root     = document.getElementById('yh-chat');
+  var $toggle   = document.getElementById('yh-chat-toggle');
+  var $close    = document.getElementById('yh-chat-close');
+  var $progress = document.getElementById('yh-chat-progress');
+  var $progressDots = $progress.querySelectorAll('.yh-progress-dot');
 
+  var TOTAL_STEPS = 6;
   var state = {
     step: 0,
     started: false,
     awaiting: null,
+    finished: false,
     answers: { name:'', contact:'', project_type:'', budget:'', zone:'', expected_count:'' }
   };
 
   function t(){ return T[getLang()]; }
 
   function scrollDown(){ $body.scrollTop = $body.scrollHeight; }
+
+  function setStep(n){
+    state.step = n;
+    if (n <= 0 || n > TOTAL_STEPS) {
+      $progress.classList.add('hidden');
+      return;
+    }
+    $progress.classList.remove('hidden');
+    $progressDots.forEach(function(dot, i){
+      dot.classList.remove('done', 'current');
+      if (i + 1 < n) dot.classList.add('done');
+      else if (i + 1 === n) dot.classList.add('current');
+    });
+  }
 
   function bot(text, cb){
     var typing = document.createElement('div');
@@ -2082,7 +2206,10 @@ function setLang(lang) {
     $text.value = '';
     $text.disabled = false;
     $send.disabled = false;
-    setTimeout(function(){ $text.focus(); }, 100);
+    // Don't autofocus on mobile — keyboard would cover the just-shown bot message
+    if (!isMobile()) {
+      setTimeout(function(){ $text.focus(); }, 100);
+    }
   }
   function hideInput(){ $form.classList.add('hidden'); }
 
@@ -2097,21 +2224,25 @@ function setLang(lang) {
   function start(){
     if (state.started) return;
     state.started = true;
-    bot(t().greet, function(){
-      bot(t().askName, function(){
-        state.awaiting = 'name';
-        showInput();
-      });
-    });
+    bot(t().greet, function(){ askName(); });
   }
 
+  function askName(){
+    setStep(1);
+    bot(t().askName, function(){
+      state.awaiting = 'name';
+      showInput();
+    });
+  }
   function askContact(){
+    setStep(2);
     bot(t().askContact, function(){
       state.awaiting = 'contact';
       showInput(t().placeholderEm);
     });
   }
   function askProject(){
+    setStep(3);
     hideInput();
     bot(t().askProject, function(){
       options(t().project, function(opt){
@@ -2122,6 +2253,7 @@ function setLang(lang) {
     });
   }
   function askBudget(){
+    setStep(4);
     bot(t().askBudget, function(){
       options(t().budget, function(opt){
         user(opt.l);
@@ -2131,6 +2263,7 @@ function setLang(lang) {
     });
   }
   function askZone(){
+    setStep(5);
     bot(t().askZone, function(){
       options(t().zone, function(opt){
         user(opt.l);
@@ -2140,14 +2273,19 @@ function setLang(lang) {
     });
   }
   function askCount(){
+    setStep(6);
     bot(t().askCount, function(){
-      state.awaiting = 'count';
-      showInput(t().placeholderNb);
+      options(t().count, function(opt){
+        user(opt.l);
+        state.answers.expected_count = opt.v;
+        submit();
+      });
     });
   }
 
   function submit(){
     hideInput();
+    setStep(0);
     bot(t().sending, function(){
       var payload = {
         name: state.answers.name,
@@ -2155,10 +2293,12 @@ function setLang(lang) {
         project_type: state.answers.project_type,
         budget: state.answers.budget,
         zone: state.answers.zone,
-        expected_count: state.answers.expected_count,
         lang: getLang(),
         source: 'landing'
       };
+      if (state.answers.expected_count) {
+        payload.expected_count = state.answers.expected_count;
+      }
       fetch(ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2174,6 +2314,7 @@ function setLang(lang) {
         m.textContent = msg;
         $body.appendChild(m);
         scrollDown();
+        state.finished = true;
       })
       .catch(function(){
         var m = document.createElement('div');
@@ -2181,6 +2322,7 @@ function setLang(lang) {
         m.textContent = t().err;
         $body.appendChild(m);
         scrollDown();
+        state.finished = true;
       });
     });
   }
@@ -2197,23 +2339,43 @@ function setLang(lang) {
     $text.value = '';
     if (state.awaiting === 'name') {
       state.answers.name = v;
+      state.awaiting = null;
       askContact();
     } else if (state.awaiting === 'contact') {
       state.answers.contact = v;
       state.awaiting = null;
       askProject();
-    } else if (state.awaiting === 'count') {
-      state.answers.expected_count = v;
-      state.awaiting = null;
-      submit();
     }
   });
 
+  function openPanel(){
+    $root.classList.add('is-open');
+    $toggle.classList.add('open');
+    $toggle.classList.remove('has-unread');
+    $toggle.setAttribute('aria-label', t().ariaClose);
+    if (isMobile()) document.body.classList.add('yh-no-scroll');
+    start();
+  }
+
+  function closePanel(){
+    $root.classList.remove('is-open');
+    $toggle.classList.remove('open');
+    $toggle.setAttribute('aria-label', t().ariaOpen);
+    document.body.classList.remove('yh-no-scroll');
+    if (state.finished) $toggle.classList.add('has-unread');
+  }
+
   $toggle.addEventListener('click', function(){
-    var open = $root.classList.toggle('is-open');
-    $toggle.classList.toggle('open', open);
-    $toggle.setAttribute('aria-label', open ? 'Fermer le chat' : 'Ouvrir le chat');
-    if (open) start();
+    if ($root.classList.contains('is-open')) closePanel();
+    else openPanel();
+  });
+  $close.addEventListener('click', closePanel);
+
+  // Keep body scroll lock consistent if the user resizes while panel is open
+  window.addEventListener('resize', function(){
+    if (!$root.classList.contains('is-open')) return;
+    if (isMobile()) document.body.classList.add('yh-no-scroll');
+    else document.body.classList.remove('yh-no-scroll');
   });
 
   // Update language-dependent UI when user toggles FR/EN
@@ -2223,11 +2385,16 @@ function setLang(lang) {
     document.querySelector('[data-yh-sub-fr]').style.display = lang === 'en' ? 'none' : '';
     document.querySelector('[data-yh-sub-en]').style.display = lang === 'en' ? '' : 'none';
     if (!$text.disabled) $text.placeholder = t().placeholder;
+    var open = $root.classList.contains('is-open');
+    $toggle.setAttribute('aria-label', open ? t().ariaClose : t().ariaOpen);
+    $close.setAttribute('aria-label', t().ariaClose);
   };
   // Sync header sub on initial load
   if (getLang() === 'en') {
     document.querySelector('[data-yh-sub-fr]').style.display = 'none';
     document.querySelector('[data-yh-sub-en]').style.display = '';
+    $toggle.setAttribute('aria-label', T.en.ariaOpen);
+    $close.setAttribute('aria-label', T.en.ariaClose);
   }
 })();
 </script>
