@@ -13,7 +13,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%239A7D4E'/%3E%3Ctext x='50' y='72' font-size='58' text-anchor='middle' fill='white' font-family='serif'%3EYH%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --cream:      #F5F0E8;
@@ -1734,6 +1734,502 @@ function setLang(lang) {
     if (saved === 'en') setLang('en');
   } catch(e) {}
 }());
+</script>
+
+<!-- ============================================================
+   CHAT WIDGET — Qualification investisseur
+============================================================ -->
+<style>
+#yh-chat * { box-sizing: border-box; }
+#yh-chat {
+  --champagne: #F5EEE0;
+  --gold:      #B8935A;
+  --gold-soft: #D4B68A;
+  --ink:       #2A2620;
+  --muted:     #8A8278;
+  --line:      rgba(184,147,90,0.22);
+  font-family: 'Raleway', sans-serif;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  color: var(--ink);
+}
+#yh-chat-toggle {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--gold); color: #fff;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.18s, background 0.18s;
+}
+#yh-chat-toggle:hover { background: #A07F46; transform: scale(1.05); }
+#yh-chat-toggle svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 1.6; }
+#yh-chat-toggle.open svg.icon-msg { display: none; }
+#yh-chat-toggle:not(.open) svg.icon-close { display: none; }
+
+#yh-chat-panel {
+  position: absolute; right: 0; bottom: 76px;
+  width: 360px; max-width: calc(100vw - 32px);
+  height: 540px; max-height: calc(100vh - 120px);
+  background: var(--champagne);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(28,26,23,0.18);
+  display: none; flex-direction: column;
+  overflow: hidden;
+  animation: yh-fade-in 0.22s ease;
+}
+#yh-chat.is-open #yh-chat-panel { display: flex; }
+@keyframes yh-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.yh-chat-head {
+  padding: 18px 20px;
+  background: var(--gold);
+  color: #fff;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0;
+}
+.yh-chat-head-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 500;
+}
+.yh-chat-head-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 500; line-height: 1.1;
+}
+.yh-chat-head-sub {
+  font-size: 11px; font-weight: 300; opacity: 0.85;
+  letter-spacing: 0.08em; margin-top: 2px;
+}
+
+.yh-chat-body {
+  flex: 1;
+  padding: 18px 16px 12px;
+  overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-soft) transparent;
+}
+.yh-chat-body::-webkit-scrollbar { width: 6px; }
+.yh-chat-body::-webkit-scrollbar-thumb { background: var(--gold-soft); border-radius: 3px; }
+
+.yh-msg {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 13.5px; line-height: 1.5;
+  font-weight: 400;
+  animation: yh-msg-in 0.18s ease;
+}
+@keyframes yh-msg-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.yh-msg.bot {
+  background: #fff;
+  color: var(--ink);
+  align-self: flex-start;
+  border: 1px solid var(--line);
+  border-bottom-left-radius: 4px;
+}
+.yh-msg.user {
+  background: var(--gold);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+}
+.yh-msg.final {
+  max-width: 92%;
+  background: #fff;
+  border: 1px solid var(--gold-soft);
+  white-space: pre-wrap;
+}
+
+.yh-typing { display: flex; gap: 4px; padding: 12px 14px; }
+.yh-typing span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--gold-soft);
+  animation: yh-bounce 1.2s infinite;
+}
+.yh-typing span:nth-child(2) { animation-delay: 0.15s; }
+.yh-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes yh-bounce {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30%           { opacity: 1;   transform: translateY(-4px); }
+}
+
+.yh-options { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 4px 4px; }
+.yh-opt {
+  font-family: 'Raleway', sans-serif;
+  font-size: 12px; font-weight: 500;
+  padding: 9px 14px;
+  background: #fff;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.16s;
+}
+.yh-opt:hover { background: var(--gold); color: #fff; }
+
+.yh-chat-input {
+  border-top: 1px solid var(--line);
+  background: #fff;
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  flex-shrink: 0;
+}
+.yh-chat-input input {
+  flex: 1;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13.5px;
+  border: none; outline: none;
+  padding: 8px 4px;
+  background: transparent;
+  color: var(--ink);
+}
+.yh-chat-input input::placeholder { color: var(--muted); }
+.yh-chat-input button {
+  width: 34px; height: 34px;
+  background: var(--gold); color: #fff;
+  border: none; border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.16s;
+}
+.yh-chat-input button:hover { background: #A07F46; }
+.yh-chat-input button:disabled { background: var(--gold-soft); cursor: not-allowed; }
+.yh-chat-input button svg { width: 14px; height: 14px; fill: #fff; }
+.yh-chat-input.hidden { display: none; }
+
+@media (max-width: 480px) {
+  #yh-chat { right: 16px; bottom: 16px; }
+  #yh-chat-panel { width: calc(100vw - 32px); height: 70vh; }
+}
+</style>
+
+<div id="yh-chat" aria-live="polite">
+  <div id="yh-chat-panel" role="dialog" aria-label="Chat Your Home">
+    <div class="yh-chat-head">
+      <div class="yh-chat-head-avatar">YH</div>
+      <div>
+        <div class="yh-chat-head-title">Your Home</div>
+        <div class="yh-chat-head-sub" data-yh-sub-fr>QUALIFICATION INVESTISSEUR</div>
+        <div class="yh-chat-head-sub" data-yh-sub-en style="display:none">INVESTOR QUALIFICATION</div>
+      </div>
+    </div>
+    <div class="yh-chat-body" id="yh-chat-body"></div>
+    <form class="yh-chat-input" id="yh-chat-input" autocomplete="off">
+      <input type="text" id="yh-chat-text" placeholder="" aria-label="Message" />
+      <button type="submit" id="yh-chat-send" aria-label="Envoyer">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </form>
+  </div>
+  <button id="yh-chat-toggle" aria-label="Ouvrir le chat">
+    <svg class="icon-msg" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.5A8 8 0 1 1 21 12z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+  </button>
+</div>
+
+<script>
+(function(){
+  var ENDPOINT = 'https://qscbpmqqcbjuobhwlcmw.supabase.co/functions/v1/landing-chatbot-qualify';
+
+  function getLang(){
+    return document.body.classList.contains('lang-en') ? 'en' : 'fr';
+  }
+
+  var T = {
+    fr: {
+      placeholder:   'Tapez votre réponse…',
+      placeholderEm: 'Email ou téléphone…',
+      placeholderNb: 'Nombre de biens…',
+      greet:    'Bonjour ! Je suis votre conseiller Your Home. Quelques questions rapides pour préparer votre dossier.',
+      askName:  'Pour commencer, comment vous appelez-vous ?',
+      askContact: 'Parfait. Votre email ou téléphone pour vous recontacter ?',
+      askProject: 'Quel est votre profil d’investisseur ?',
+      askBudget:  'Quel budget envisagez-vous ?',
+      askZone:    'Quelle zone à Dubai vous intéresse ?',
+      askCount:   'Combien de biens souhaitez-vous acquérir ?',
+      sending:    'Un instant, je transmets votre dossier…',
+      err:        'Désolé, une erreur est survenue. Réessayez ou écrivez-nous à contact@yourhome.ae',
+      invalidContact: 'Merci de saisir un email valide ou un numéro de téléphone.',
+      project: [
+        { v:'investor_remote', l:'Investisseur à distance' },
+        { v:'investor_dubai',  l:'Résident à Dubai' },
+        { v:'investor_intl',   l:'Investisseur international' }
+      ],
+      budget: [
+        { v:'200k',  l:'~ 200k €' },
+        { v:'500k',  l:'~ 500k €' },
+        { v:'1M+',   l:'1M+ €' }
+      ],
+      zone: [
+        { v:'Marina',         l:'Marina' },
+        { v:'Downtown',       l:'Downtown' },
+        { v:'Palm',           l:'Palm Jumeirah' },
+        { v:'Business Bay',   l:'Business Bay' },
+        { v:'Autre',          l:'Autre' }
+      ]
+    },
+    en: {
+      placeholder:   'Type your answer…',
+      placeholderEm: 'Email or phone…',
+      placeholderNb: 'Number of properties…',
+      greet:    'Hello! I’m your Your Home advisor. A few quick questions to prepare your file.',
+      askName:  'To start, what is your name?',
+      askContact: 'Great. Your email or phone so we can get back to you?',
+      askProject: 'What is your investor profile?',
+      askBudget:  'What budget are you considering?',
+      askZone:    'Which Dubai area interests you?',
+      askCount:   'How many properties do you wish to acquire?',
+      sending:    'One moment, sending your file…',
+      err:        'Sorry, an error occurred. Please retry or email contact@yourhome.ae',
+      invalidContact: 'Please enter a valid email or phone number.',
+      project: [
+        { v:'investor_remote', l:'Remote investor' },
+        { v:'investor_dubai',  l:'Dubai resident' },
+        { v:'investor_intl',   l:'International investor' }
+      ],
+      budget: [
+        { v:'200k',  l:'~ 200k €' },
+        { v:'500k',  l:'~ 500k €' },
+        { v:'1M+',   l:'1M+ €' }
+      ],
+      zone: [
+        { v:'Marina',         l:'Marina' },
+        { v:'Downtown',       l:'Downtown' },
+        { v:'Palm',           l:'Palm Jumeirah' },
+        { v:'Business Bay',   l:'Business Bay' },
+        { v:'Autre',          l:'Other' }
+      ]
+    }
+  };
+
+  var $body  = document.getElementById('yh-chat-body');
+  var $form  = document.getElementById('yh-chat-input');
+  var $text  = document.getElementById('yh-chat-text');
+  var $send  = document.getElementById('yh-chat-send');
+  var $panel = document.getElementById('yh-chat-panel');
+  var $root  = document.getElementById('yh-chat');
+  var $toggle= document.getElementById('yh-chat-toggle');
+
+  var state = {
+    step: 0,
+    started: false,
+    awaiting: null,
+    answers: { name:'', contact:'', project_type:'', budget:'', zone:'', expected_count:'' }
+  };
+
+  function t(){ return T[getLang()]; }
+
+  function scrollDown(){ $body.scrollTop = $body.scrollHeight; }
+
+  function bot(text, cb){
+    var typing = document.createElement('div');
+    typing.className = 'yh-msg bot yh-typing';
+    typing.innerHTML = '<span></span><span></span><span></span>';
+    $body.appendChild(typing);
+    scrollDown();
+    setTimeout(function(){
+      typing.remove();
+      var m = document.createElement('div');
+      m.className = 'yh-msg bot';
+      m.textContent = text;
+      $body.appendChild(m);
+      scrollDown();
+      if (cb) cb();
+    }, 550);
+  }
+
+  function user(text){
+    var m = document.createElement('div');
+    m.className = 'yh-msg user';
+    m.textContent = text;
+    $body.appendChild(m);
+    scrollDown();
+  }
+
+  function options(list, onPick){
+    var box = document.createElement('div');
+    box.className = 'yh-options';
+    list.forEach(function(opt){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'yh-opt';
+      b.textContent = opt.l;
+      b.addEventListener('click', function(){
+        box.remove();
+        onPick(opt);
+      });
+      box.appendChild(b);
+    });
+    $body.appendChild(box);
+    scrollDown();
+  }
+
+  function showInput(placeholder){
+    $form.classList.remove('hidden');
+    $text.placeholder = placeholder || t().placeholder;
+    $text.value = '';
+    $text.disabled = false;
+    $send.disabled = false;
+    setTimeout(function(){ $text.focus(); }, 100);
+  }
+  function hideInput(){ $form.classList.add('hidden'); }
+
+  function isValidContact(v){
+    var s = (v || '').trim();
+    if (s.length < 4) return false;
+    var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var phoneRe = /^[+\d][\d\s().-]{5,}$/;
+    return emailRe.test(s) || phoneRe.test(s);
+  }
+
+  function start(){
+    if (state.started) return;
+    state.started = true;
+    bot(t().greet, function(){
+      bot(t().askName, function(){
+        state.awaiting = 'name';
+        showInput();
+      });
+    });
+  }
+
+  function askContact(){
+    bot(t().askContact, function(){
+      state.awaiting = 'contact';
+      showInput(t().placeholderEm);
+    });
+  }
+  function askProject(){
+    hideInput();
+    bot(t().askProject, function(){
+      options(t().project, function(opt){
+        user(opt.l);
+        state.answers.project_type = opt.v;
+        askBudget();
+      });
+    });
+  }
+  function askBudget(){
+    bot(t().askBudget, function(){
+      options(t().budget, function(opt){
+        user(opt.l);
+        state.answers.budget = opt.v;
+        askZone();
+      });
+    });
+  }
+  function askZone(){
+    bot(t().askZone, function(){
+      options(t().zone, function(opt){
+        user(opt.l);
+        state.answers.zone = opt.v;
+        askCount();
+      });
+    });
+  }
+  function askCount(){
+    bot(t().askCount, function(){
+      state.awaiting = 'count';
+      showInput(t().placeholderNb);
+    });
+  }
+
+  function submit(){
+    hideInput();
+    bot(t().sending, function(){
+      var payload = {
+        name: state.answers.name,
+        contact: state.answers.contact,
+        project_type: state.answers.project_type,
+        budget: state.answers.budget,
+        zone: state.answers.zone,
+        expected_count: state.answers.expected_count,
+        lang: getLang(),
+        source: 'landing'
+      };
+      fetch(ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        var lang = getLang();
+        var msg = (lang === 'en' ? data.message_en : data.message_fr) || data.message_fr || data.message_en || '';
+        if (!msg) { msg = t().err; }
+        var m = document.createElement('div');
+        m.className = 'yh-msg bot final';
+        m.textContent = msg;
+        $body.appendChild(m);
+        scrollDown();
+      })
+      .catch(function(){
+        var m = document.createElement('div');
+        m.className = 'yh-msg bot';
+        m.textContent = t().err;
+        $body.appendChild(m);
+        scrollDown();
+      });
+    });
+  }
+
+  $form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var v = $text.value.trim();
+    if (!v) return;
+    if (state.awaiting === 'contact' && !isValidContact(v)) {
+      bot(t().invalidContact);
+      return;
+    }
+    user(v);
+    $text.value = '';
+    if (state.awaiting === 'name') {
+      state.answers.name = v;
+      askContact();
+    } else if (state.awaiting === 'contact') {
+      state.answers.contact = v;
+      state.awaiting = null;
+      askProject();
+    } else if (state.awaiting === 'count') {
+      state.answers.expected_count = v;
+      state.awaiting = null;
+      submit();
+    }
+  });
+
+  $toggle.addEventListener('click', function(){
+    var open = $root.classList.toggle('is-open');
+    $toggle.classList.toggle('open', open);
+    $toggle.setAttribute('aria-label', open ? 'Fermer le chat' : 'Ouvrir le chat');
+    if (open) start();
+  });
+
+  // Update language-dependent UI when user toggles FR/EN
+  var origSetLang = window.setLang;
+  window.setLang = function(lang){
+    if (origSetLang) origSetLang(lang);
+    document.querySelector('[data-yh-sub-fr]').style.display = lang === 'en' ? 'none' : '';
+    document.querySelector('[data-yh-sub-en]').style.display = lang === 'en' ? '' : 'none';
+    if (!$text.disabled) $text.placeholder = t().placeholder;
+  };
+  // Sync header sub on initial load
+  if (getLang() === 'en') {
+    document.querySelector('[data-yh-sub-fr]').style.display = 'none';
+    document.querySelector('[data-yh-sub-en]').style.display = '';
+  }
+})();
 </script>
 
 </body>
